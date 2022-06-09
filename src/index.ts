@@ -26,13 +26,6 @@ app.get('/', (req: Request, res: Response) => {
     let sum = a + b
 
     res.send('Hello World!!!')
-    // res.send({value: sum})
-
-    // let a = res.query.a
-    // let b =  res.query.b
-    // let sum = a + b
-    // console.log(sum)
-    // res.send({value:sum})
 })
 
 app.get('/videos', (req: Request, res: Response) => {
