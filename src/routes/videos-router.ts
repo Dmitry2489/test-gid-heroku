@@ -44,7 +44,7 @@ VideosRouter.post('/',
         )
         return
     }
-    const newVideo = videosRepository.createVideo(req.body.title.)
+    const newVideo = videosRepository.createVideo(req.body.title)
     res.status(201).send(newVideo)
 })
 
