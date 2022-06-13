@@ -31,7 +31,7 @@ VideosRouter.post('/',
     (req: Request, res: Response) => {
     console.log(!req.body.title)
         console.log(req.body.title.trim().length)
-    if (!req.body.title && req.body.title.trim().length <= 40) {
+    if (!req.body.title) {
         res.status(400).json(
             {
                 "errorsMessages": [
