@@ -1,18 +1,12 @@
 import {Request, Response, Router} from "express";
-
-const videos = [
-    {id: 1, title: 'About JS - 01', author: 'it-incubator.eu'},
-    {id: 2, title: 'About JS - 02', author: 'it-incubator.eu'},
-    {id: 3, title: 'About JS - 03', author: 'it-incubator.eu'},
-    {id: 4, title: 'About JS - 04', author: 'it-incubator.eu'},
-    {id: 5, title: 'About JS - 05', author: 'it-incubator.eu'},
-]
+import {videosRepository} from "../repositories/videos-repository";
 
 export const VideosRouter = Router({})
 
-
 VideosRouter.get('/', (req: Request, res: Response) => {
-    res.send(videos)
+    const allVideos = videosRepository.allVideos()
+
+    res.status(200).send(allVideos)
 })
 
 VideosRouter.get('/:videoId', (req: Request, res: Response) => {
