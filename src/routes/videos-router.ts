@@ -26,8 +26,8 @@ VideosRouter.get('/', (req: Request, res: Response) => {
 // })
 
 VideosRouter.post('/',
-    titleValidation,
-    inputValidationMiddleware,
+    // titleValidation,
+    // inputValidationMiddleware,
     (req: Request, res: Response) => {
 
     if (!req.body.title && req.body.title.length.trim() > 40) {
