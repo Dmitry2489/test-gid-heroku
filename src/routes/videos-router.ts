@@ -29,8 +29,9 @@ VideosRouter.post('/',
     // titleValidation,
     // inputValidationMiddleware,
     (req: Request, res: Response) => {
-
-    if (!req.body.title && req.body.title.length.trim() <= 40) {
+    console.log(!req.body.title)
+        console.log(!req.body.title)
+    if (!req.body.title && req.body.title.trim().length <= 40) {
         res.status(400).json(
             {
                 "errorsMessages": [
