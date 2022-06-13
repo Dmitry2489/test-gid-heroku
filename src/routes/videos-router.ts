@@ -30,7 +30,7 @@ VideosRouter.post('/',
     inputValidationMiddleware,
     (req: Request, res: Response) => {
 
-    if (!req.body.title && req.body.title.length > 40) {
+    if (!req.body.title && req.body.title.length.trim() > 40) {
         res.status(400).json(
             {
                 "errorsMessages": [
@@ -44,7 +44,7 @@ VideosRouter.post('/',
         )
         return
     }
-    const newVideo = videosRepository.createVideo(req.body.title)
+    const newVideo = videosRepository.createVideo(req.body.title.)
     res.status(201).send(newVideo)
 })
 
