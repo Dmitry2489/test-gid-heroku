@@ -5,7 +5,7 @@ import {inputValidationMiddleware} from "../middlewares/input-validation-middlew
 
 export const VideosRouter = Router({})
 
-const titleValidation = body("title").trim().isLength({min: 3 , max: 40}).withMessage('Title length should be from 3 to 10 symbols')
+const titleValidation = body("title").trim().isLength({min: 3 , max: 40}).withMessage('Title length should be from 3 to 40 symbols')
 
 VideosRouter.get('/', (req: Request, res: Response) => {
     const allVideos = videosRepository.allVideos()
@@ -29,8 +29,23 @@ VideosRouter.post('/',
     titleValidation,
     inputValidationMiddleware,
     (req: Request, res: Response) => {
+
+    if (!req.body.title && req.body.title.length > 40) {
+        res.status(400).json(
+            {
+                "errorsMessages": [
+                    {
+                        "message": "Title is required",
+                        "field": "title"
+                    }
+                ],
+                "resultCode": 1
+            }
+        )
+        return
+    }
     const newVideo = videosRepository.createVideo(req.body.title)
-    res.send(newVideo)
+    res.status(201).send(newVideo)
 })
 
 // VideosRouter.delete('/:id',(req: Request, res: Response)=>{
