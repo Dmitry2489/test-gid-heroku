@@ -7,7 +7,18 @@ const videos = [
 ]
 
 export const videosRepository = {
-    allVideos () {
+    allVideos() {
         return videos
+    },
+    findVideoById(id: number) {
+
+    },
+    createVideo(title: string) {
+        const newVideo = {
+            id: +(new Date()),
+            title: title,
+            author: 'it-incubator.eu'
+        }
+        videos.push(newVideo)
     }
 }
