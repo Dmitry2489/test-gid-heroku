@@ -20,5 +20,15 @@ export const videosRepository = {
             author: 'it-incubator.eu'
         }
         videos.push(newVideo)
+    },
+    deleteVideo(id: number) {
+        const index = videos.findIndex(v => v.id === id)
+
+        if(index === -1) {
+            return false
+        } else {
+            videos.splice(index, 1)
+            return  true
+        }
     }
 }

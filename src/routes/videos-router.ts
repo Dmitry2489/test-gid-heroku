@@ -30,7 +30,7 @@ VideosRouter.post('/',
     // inputValidationMiddleware,
     (req: Request, res: Response) => {
     console.log(!req.body.title)
-        console.log(!req.body.title)
+        console.log(req.body.title.trim().length)
     if (!req.body.title && req.body.title.trim().length <= 40) {
         res.status(400).json(
             {
@@ -49,20 +49,18 @@ VideosRouter.post('/',
     res.status(201).send(newVideo)
 })
 
-// VideosRouter.delete('/:id',(req: Request, res: Response)=>{
-//     // put your code here
-//     const id = +req.params.id;
-//
-//     const index = videos.findIndex(v => v.id === id)
-//
-//     if(index === -1) {
-//         res.sendStatus(404)
-//     } else {
-//         videos.splice(index, 1)
-//         res.sendStatus(204)
-//     }
-// })
-//
+VideosRouter.delete('/:id',(req: Request, res: Response)=>{
+    const id = +req.params.id
+
+    const deleteVideo = videosRepository.deleteVideo(id)
+
+    if(!deleteVideo) {
+        res.sendStatus(404)
+    } else {
+        res.sendStatus(204)
+    }
+})
+
 // VideosRouter.put('/:id',(req: Request, res: Response)=>{
 //     // put your code here
 //     const id = +req.params.id;
