@@ -45,9 +45,9 @@ VideosRouter.post('/',
     // titleValidation,
     // inputValidationMiddleware,
     (req: Request, res: Response) => {
-    console.log(!req.body.title)
-        console.log(req.body.title.trim().length)
-    if (!req.body.title || req.body.title === null) {
+    // console.log(!req.body.title)
+    //     console.log(req.body.title.trim().length)
+    if (!req.body.title || req.body.title == null) {
         res.status(400).json(
             {
                 "errorsMessages": [
@@ -61,7 +61,7 @@ VideosRouter.post('/',
         )
         return
     }
-    if (req.body.title.length > 40) {
+    if (req.body.title.length.trim() > 40) {
         res.status(400).json(
             {
                 "errorsMessages": [
