@@ -13,17 +13,17 @@ VideosRouter.get('/', (req: Request, res: Response) => {
     res.status(200).send(allVideos)
 })
 
-// VideosRouter.get('/:videoId', (req: Request, res: Response) => {
-//     const id = +req.params.videoId;
-//     // FIND VIDEO AND RETURN IT
-//     const video = videos.find(v => v.id === id)
-//     // IF VIDEO IS NOW EXISTS THEN RETURN 404 CODE
-//     if(!video) {
-//         res.sendStatus(404)
-//     } else {
-//         res.json(video)
-//     }
-// })
+VideosRouter.get('/:videoId', (req: Request, res: Response) => {
+    const id = +req.params.videoId;
+    // FIND VIDEO AND RETURN IT
+    const video = videosRepository.findVideoById(id)
+    // IF VIDEO IS NOW EXISTS THEN RETURN 404 CODE
+    if(!video) {
+        res.sendStatus(404)
+    } else {
+        res.json(video)
+    }
+})
 
 VideosRouter.post('/',
     // titleValidation,
