@@ -9,8 +9,6 @@ const titleValidation = body("title").trim().isLength({min: 3 , max: 40}).withMe
 
 VideosRouter.get('/', (req: Request, res: Response) => {
     const allVideos = videosRepository.allVideos()
-    console.log('allVideos', allVideos)
-    console.log('allVideos')
     res.status(200).send(allVideos)
 })
 
@@ -46,8 +44,6 @@ VideosRouter.post('/',
     // titleValidation,
     // inputValidationMiddleware,
     (req: Request, res: Response) => {
-    // console.log(!req.body.title)
-    //     console.log(req.body.title.trim().length)
     if (!req.body.title || req.body.title == null) {
         res.status(400).json(
             {
@@ -57,7 +53,6 @@ VideosRouter.post('/',
                         "field": "title"
                     }
                 ],
-                "resultCode": 1
             }
         )
         return
@@ -98,7 +93,7 @@ VideosRouter.put('/:id',(req: Request, res: Response)=>{
     const titleVideo = req.body.title.trim()
 
 
-    if (!titleVideo) {
+    if (!titleVideo || titleVideo === null) {
         res.status(400).json(
             {
                 "errorsMessages": [
@@ -107,14 +102,10 @@ VideosRouter.put('/:id',(req: Request, res: Response)=>{
                         "field": "title"
                     }
                 ],
-                "resultCode": 1
             }
         )
         return;
     }
-
-   let dima =  titleVideo.length > 40
-    let dim1 = titleVideo.length > 3
 
     if (titleVideo.length > 40  || titleVideo.length < 3) {
         res.status(400).json(
