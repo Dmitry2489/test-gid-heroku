@@ -24,6 +24,7 @@ export const videosRepository = {
             author: 'it-incubator.eu'
         }
         videos.push(newVideo)
+        return newVideo;
     },
     deleteVideo(id: number) {
         const index = videos.findIndex(v => v.id === id)
