@@ -10,6 +10,7 @@ const titleValidation = body("title").trim().isLength({min: 3 , max: 40}).withMe
 VideosRouter.get('/', (req: Request, res: Response) => {
     const allVideos = videosRepository.allVideos()
     console.log('allVideos', allVideos)
+    console.log('allVideos')
     res.status(200).send(allVideos)
 })
 
