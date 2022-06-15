@@ -115,7 +115,6 @@ VideosRouter.put('/:id',(req: Request, res: Response)=>{
                         "field": "title"
                     }
                 ],
-                "resultCode": 1
             }
         )
         return;
