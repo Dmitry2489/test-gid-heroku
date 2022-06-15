@@ -57,7 +57,7 @@ VideosRouter.post('/',
         )
         return
     }
-    if (req.body.title.length > 40) {
+    if (req.body.title.trim().length > 40  || req.body.title.trim().length < 3) {
         res.status(400).json(
             {
                 "errorsMessages": [
@@ -66,7 +66,6 @@ VideosRouter.post('/',
                         "field": "title"
                     }
                 ],
-                "resultCode": 1
             }
         )
         return
@@ -90,7 +89,7 @@ VideosRouter.delete('/:id',(req: Request, res: Response)=>{
 VideosRouter.put('/:id',(req: Request, res: Response)=>{
     // put your code here
     const idVideo = +req.params.id;
-    const titleVideo = req.body.title.trim()
+    const titleVideo = req.body.title
 
 
     if (!titleVideo || titleVideo === null) {
@@ -107,7 +106,7 @@ VideosRouter.put('/:id',(req: Request, res: Response)=>{
         return;
     }
 
-    if (titleVideo.length > 40  || titleVideo.length < 3) {
+    if (titleVideo.trim().length > 40  || titleVideo.trim().length < 3) {
         res.status(400).json(
             {
                 "errorsMessages": [
