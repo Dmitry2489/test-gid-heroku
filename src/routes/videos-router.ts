@@ -45,6 +45,20 @@ VideosRouter.post('/',
         )
         return
     }
+    if (req.body.title.length > 40) {
+        res.status(400).json(
+            {
+                "errorsMessages": [
+                    {
+                        "message": "Title length should be from 3 to 40 symbols",
+                        "field": "title"
+                    }
+                ],
+                "resultCode": 1
+            }
+        )
+        return
+    }
     const newVideo = videosRepository.createVideo(req.body.title)
     res.status(201).send(newVideo)
 })
