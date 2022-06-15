@@ -22,7 +22,7 @@ VideosRouter.get('/:videoId', (req: Request, res: Response) => {
                 "errorsMessages": [
                     {
                         "message": "Id is required",
-                        "field": "title"
+                        "field": "Id"
                     }
                 ],
                 "resultCode": 1
@@ -91,30 +91,50 @@ VideosRouter.delete('/:id',(req: Request, res: Response)=>{
     }
 })
 
-// VideosRouter.put('/:id',(req: Request, res: Response)=>{
-//     // put your code here
-//     const id = +req.params.id;
-//     const index = videos.findIndex(v => v.id === id)
-//
-//     if (!req.body.title) {
-//         res.status(400).json(
-//             {
-//                 "errorsMessages": [
-//                     {
-//                         "message": "Title is required",
-//                         "field": "title"
-//                     }
-//                 ],
-//                 "resultCode": 1
-//             }
-//         )
-//         return
-//     }
-//
-//     if(index === -1) {
-//         res.sendStatus(404)
-//     } else {
-//         videos[index].title = req.body.title
-//         res.sendStatus(202)
-//     }
-// })
+VideosRouter.put('/:id',(req: Request, res: Response)=>{
+    // put your code here
+    const idVideo = +req.params.id;
+    const titleVideo = req.body.title.trim()
+
+
+    if (!titleVideo) {
+        res.status(400).json(
+            {
+                "errorsMessages": [
+                    {
+                        "message": "Title is required",
+                        "field": "title"
+                    }
+                ],
+                "resultCode": 1
+            }
+        )
+        return;
+    }
+
+   let dima =  titleVideo.length > 40
+    let dim1 = titleVideo.length > 3
+
+    if (titleVideo.length > 40  || titleVideo.length < 3) {
+        res.status(400).json(
+            {
+                "errorsMessages": [
+                    {
+                        "message": "Title length should be from 3 to 40 symbols",
+                        "field": "title"
+                    }
+                ],
+                "resultCode": 1
+            }
+        )
+        return;
+    }
+
+    const video = videosRepository.updateVideo(idVideo, titleVideo)
+
+    if(video) {
+        res.sendStatus(204)
+    } else {
+        res.sendStatus(404)
+    }
+})

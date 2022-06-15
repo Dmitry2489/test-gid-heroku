@@ -29,10 +29,21 @@ export const videosRepository = {
         const index = videos.findIndex(v => v.id === id)
 
         if(index === -1) {
-            return false
+            return false;
         } else {
             videos.splice(index, 1)
-            return  true
+            return  videos;
+        }
+    },
+    updateVideo(id: number, title: string) {
+        const index = videos.findIndex(v => v.id === id)
+
+        if(index === -1) {
+            return false;
+        } else {
+            videos[index].title = title
+            return true;
         }
     }
+
 }
