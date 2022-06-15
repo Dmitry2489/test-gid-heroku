@@ -14,9 +14,7 @@ export const videosRepository = {
         const video = videos.find(v => v.id === id)
 
         if (video) {
-            return true
-        } else {
-            return false
+            return video
         }
     },
     createVideo(title: string) {
